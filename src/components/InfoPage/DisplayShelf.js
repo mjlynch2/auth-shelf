@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Display extends Component {
-    componentDidMount = () =>{
-        this.props.dispatch({ type: 'GET_ITEM' });
 
-    }    
+    componentDidMount = () => {
+        this.props.dispatch({ type: 'GET_ITEM' });
+    }
+
     render (){
         return (
             <div>
-                {JSON.stringify(this.props.reduxState.shelfReducer)}
-                {/* {this.props.reduxState.shelfReducer.map(item => {
-                    <div key= {item.id}>
-                    {item.description}
-                    <img src={item.image_url} alt={item.description}/>
+                {this.props.shelf.map((shelfItem) => { return ( 
+                    <div key = {shelfItem.id}>
+                        {shelfItem.description}
+                        <br/>
+                        <img src={shelfItem.image_url}/>
                     </div>
-                }) } */}
+                )})}
+
             </div>
         )
     }
 } 
 const mapToState = reduxState => ({
-    reduxState,
+    shelf: reduxState.shelfReducer,
 })
 export default connect(mapToState)(Display);
