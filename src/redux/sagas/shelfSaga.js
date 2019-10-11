@@ -2,6 +2,10 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "" actions
+function* shelfSaga() {
+    yield takeLatest('GET_ITEM', fetchItem);
+}
+
 function* fetchItem() {
         try {
             const config = {
@@ -13,10 +17,6 @@ function* fetchItem() {
         } catch (error) {
             console.log('fetch item is wonky', error)
         }
-}
-
-function* shelfSaga() {
-    yield takeLatest('GET_ITEM', fetchItem);
 }
 
 export default shelfSaga;
